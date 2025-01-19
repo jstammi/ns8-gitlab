@@ -14,7 +14,7 @@ GITLAB_RUNNER_VERSION="latest"
 # Prepare variables for later use
 images=()
 # The image will be pushed to GitHub container registry
-repobase="${REPOBASE:-ghcr.io/phillopp}"
+repobase="${REPOBASE:-ghcr.io/jstammi}"
 # Configure the image name
 reponame="gitlab"
 
@@ -61,7 +61,7 @@ images+=("${repobase}/${reponame}")
 #
 
 #
-# Setup CI when pushing to Github. 
+# Setup CI when pushing to Github.
 # Warning! docker::// protocol expects lowercase letters (,,)
 if [[ -n "${CI}" ]]; then
     # Set output value for Github Actions

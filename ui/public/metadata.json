@@ -9,6 +9,10 @@
     {
       "name": "Philip Falliano",
       "email": "philip.falliano@phillopp.de"
+    },
+    {
+      "name": "jstammi",
+      "email": "jstammi@gmx.net"
     }
   ],
   "docs": {
@@ -16,5 +20,5 @@
     "bug_url": "https://github.com/phillopp/ns8-gitlab/issues",
     "code_url": "https://github.com/phillopp/ns8-gitlab"
   },
-  "source": "ghcr.io/phillopp/gitlab"
+  "source": "ghcr.io/jstammi/gitlab"
 }
