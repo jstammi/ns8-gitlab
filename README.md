@@ -6,12 +6,12 @@ This is [Gitlab](https://about.gitlab.com/)-CE for Nethserver 8.
 
 Instantiate the module with:
 
-    add-module ghcr.io/phillopp/gitlab:latest 1
+    add-module ghcr.io/jstammi/gitlab:latest 1
 
 The output of the command will return the instance name.
 Output example:
 
-    {"module_id": "gitlab1", "image_name": "gitlab", "image_url": "ghcr.io/phillopp/gitlab:latest"}
+    {"module_id": "gitlab1", "image_name": "gitlab", "image_url": "ghcr.io/jstammi/gitlab:latest"}
 
 ## Configure
 
@@ -41,7 +41,7 @@ Send a test HTTP request to the gitlab backend service:
 You can forcefully update the module
 
 ```shell
-api-cli run update-module --data '{"module_url":"ghcr.io/phillopp/gitlab:latest","instances":["gitlab1"],"force":true}'
+api-cli run update-module --data '{"module_url":"ghcr.io/jstammi/gitlab:latest","instances":["gitlab1"],"force":true}'
 ```
 
 ## Smarthost setting discovery
@@ -74,7 +74,7 @@ To uninstall the instance:
 Test the module using the `test-module.sh` script:
 
 
-    ./test-module.sh <NODE_ADDR> ghcr.io/phillopp/gitlab:latest
+    ./test-module.sh <NODE_ADDR> ghcr.io/jstammi/gitlab:latest
 
 The tests are made using [Robot Framework](https://robotframework.org/)
 
