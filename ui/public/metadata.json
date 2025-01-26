@@ -18,7 +18,7 @@
   "docs": {
     "documentation_url": "https://github.com/phillopp/ns8-gitlab/wiki",
     "bug_url": "https://github.com/phillopp/ns8-gitlab/issues",
-    "code_url": "https://github.com/phillopp/ns8-gitlab"
+    "code_url": "https://github.com/jstammi/ns8-gitlab"
   },
   "source": "ghcr.io/jstammi/gitlab"
 }

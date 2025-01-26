@@ -110,7 +110,7 @@
             </div>
             <div class="key-value-setting">
               <span class="label">{{
-                core.$t("software_center.source_package")
+                core.$t("about.source_package")
               }}</span>
               <span class="value">
                 {{ app.source }}
@@ -160,13 +160,8 @@
 
 <script>
 import to from "await-to-js";
-import { mapState } from "vuex";
-import {
-  QueryParamService,
-  TaskService,
-  UtilService,
-  PageTitleService,
-} from "@nethserver/ns8-ui-lib";
+import {mapState} from "vuex";
+import {PageTitleService, QueryParamService, TaskService, UtilService,} from "@nethserver/ns8-ui-lib";
 
 export default {
   name: "About",
