@@ -36,6 +36,11 @@ Send a test HTTP request to the gitlab backend service:
 
     curl http://127.0.0.1/gitlab/
 
+No LDAP user or group is given admin role initially.
+The passwor given on configuring is not (yet) respected.
+But the `root` standard user's password is generated and written to
+`/home/gitlabX/.local/share/containers/storage/volumes/gitlab-config/_data/initial_root_password`.
+
 ## Update module
 
 You can forcefully update the module
