@@ -5,11 +5,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import json
-import sys
-import os
-import agent
 import agent.tasks
+import json
+import os
+import sys
 
 data = json.load(sys.stdin)
 
@@ -18,6 +17,7 @@ host = data.get("host")
 ldap_domain = data.get("ldap_domain")
 registry_host = data.get("registry_host")
 initial_password = data.get("password")
+runner_token = data.get("runner_token")
 server_port, registry_port = os.environ['TCP_PORTS'].split(",")
 
 if (not os.environ.get('HOST', False) or host != os.environ['HOST']) and agent.http_route_in_use(domain=host):
@@ -31,3 +31,4 @@ agent.set_env("LDAP_DOMAIN", ldap_domain)
 agent.set_env("GITLAB_REGISTRY_HOST", registry_host)
 agent.set_env("GITLAB_REGISTRY_PORT", registry_port)
 agent.set_env("GITLAB_INITIAL_PASSWORD", initial_password)
+agent.set_env("GITLAB_RUNNER_TOKEN", runner_token)

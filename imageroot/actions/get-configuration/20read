@@ -5,10 +5,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import json
-import sys
 import agent
+import json
 import os
+import sys
 from agent.ldapproxy import Ldapproxy
 
 config = {}
@@ -30,5 +30,6 @@ for key in lp.get_domains_list():
 config['ldap_domain_list'] = domains
 config['ldap_domain'] = rdb.hget(env, "LDAP_DOMAIN")
 config['registry_host'] = rdb.hget(env, "GITLAB_REGISTRY_HOST")
+config['runner_token'] = rdb.hget(env, "GITLAB_RUNNER_TOKEN")
 
 json.dump(config, fp=sys.stdout)
