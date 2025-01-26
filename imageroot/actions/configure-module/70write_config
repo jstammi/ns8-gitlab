@@ -82,13 +82,13 @@ if ldap_domain:
     gitlab_conf.append(f"gitlab_rails['ldap_enabled'] = true")
 
     uid = 'uid'
-    ad = False
+    ad = 'false'
     if odom['schema'] == 'ad':
         uid = "sAMAccountName"
-        ad = True
+        ad = 'true'
     else:
         uid = 'uid'
-        ad = False
+        ad = 'false'
 
     gitlab_config['ldap_servers'] = {
         'main': {
@@ -97,13 +97,13 @@ if ldap_domain:
             'bind_dn': odom['bind_dn'],
             'password': odom['bind_password'],
             'uid': uid,
-            'active_directory': ad.lower,
+            'active_directory': ad,
             'port': odom['port'],
             'base': odom['base_dn'],
-            'block_auto_created_users': false,
+            'block_auto_created_users': 'false',
             'encryption': 'plain',
-            'verify_certificates': false,
-            'block_auto_created_user': false
+            'verify_certificates': 'false',
+            'block_auto_created_user': 'false'
         }
     }
 
