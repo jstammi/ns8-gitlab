@@ -16,7 +16,7 @@ config = {}
 env = f'module/{os.environ["MODULE_ID"]}/environment'
 rdb = agent.redis_connect()
 config["host"] =  rdb.hget(env, "HOST")
-config["lets_encrypt"] =  rdb.hget(env, "LETS_ENCRYPT") == "True"
+config["lets_encrypt"] =  rdb.hget(env, "LETS_ENCRYPT") == "False"
 
 lp = Ldapproxy()
 domains = []

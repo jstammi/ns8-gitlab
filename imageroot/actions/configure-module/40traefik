@@ -5,11 +5,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import json
-import sys
-import os
-import agent
 import agent.tasks
+import json
+import os
+import sys
 
 data = json.load(sys.stdin)
 
@@ -29,7 +28,7 @@ response = agent.tasks.run(
         'instance': os.environ['MODULE_ID'],
         'url': f'http://127.0.0.1:{os.environ["GITLAB_NGINX_PORT"]}',
         'host': host,
-        'lets_encrypt': True,
+        'lets_encrypt': False,
         'http2https': True
     },
 )
@@ -45,7 +44,7 @@ if registry_url:
             'instance': os.environ['MODULE_ID']+'-registry',
             'url': f'http://127.0.0.1:{os.environ["GITLAB_REGISTRY_PORT"]}',
             'host': registry_url,
-            'lets_encrypt': True,
+            'lets_encrypt': False,
             'http2https': True
         },
     )

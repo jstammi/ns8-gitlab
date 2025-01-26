@@ -283,7 +283,7 @@ export default {
           data: {
             host: this.host,
             http2https: true,
-            lets_encrypt: true,
+            lets_encrypt: false,
             password: this.password,
             ldap_domain: this.ldap_domain,
             registry_host: this.registryHost,
