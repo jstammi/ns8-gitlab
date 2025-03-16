@@ -5,15 +5,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import agent.tasks
 import json
 import os
 import sys
+
+import agent.tasks
 
 data = json.load(sys.stdin)
 
 # Setup variables
 host = data.get("host")
+lets_encrypt = data.get("lets_encrypt", True)
 ldap_domain = data.get("ldap_domain")
 registry_host = data.get("registry_host")
 initial_password = data.get("password")
@@ -26,6 +28,7 @@ if (not os.environ.get('HOST', False) or host != os.environ['HOST']) and agent.h
     sys.exit(2)
 
 agent.set_env("HOST", host)
+agent.set_env("LETS_ENCRYPT", lets_encrypt)
 agent.set_env("GITLAB_NGINX_PORT", server_port)
 agent.set_env("LDAP_DOMAIN", ldap_domain)
 agent.set_env("GITLAB_REGISTRY_HOST", registry_host)

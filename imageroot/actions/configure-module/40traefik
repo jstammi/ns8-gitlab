@@ -5,15 +5,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-import agent.tasks
 import json
 import os
 import sys
+
+import agent.tasks
 
 data = json.load(sys.stdin)
 
 # Setup variables
 host = os.environ.get('HOST')
+lets_encrypt = os.environ.get('LETS_ENCRYPT') == "True"
 registry_url = os.environ.get('GITLAB_REGISTRY_HOST')
 
 default_traefik_id = agent.resolve_agent_id('traefik@node')
@@ -28,7 +30,7 @@ response = agent.tasks.run(
         'instance': os.environ['MODULE_ID'],
         'url': f'http://127.0.0.1:{os.environ["GITLAB_NGINX_PORT"]}',
         'host': host,
-        'lets_encrypt': False,
+        'lets_encrypt': lets_encrypt,
         'http2https': True
     },
 )
@@ -44,7 +46,7 @@ if registry_url:
             'instance': os.environ['MODULE_ID']+'-registry',
             'url': f'http://127.0.0.1:{os.environ["GITLAB_REGISTRY_PORT"]}',
             'host': registry_url,
-            'lets_encrypt': False,
+            'lets_encrypt': lets_encrypt,
             'http2https': True
         },
     )
