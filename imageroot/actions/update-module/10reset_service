@@ -16,4 +16,8 @@ exec 1>&2
 systemctl --user daemon-reload
 
 # Restart container
-systemctl --user restart gitlab.service gitlab-app.service # gitlab-runner.service
+systemctl --user restart gitlab.service gitlab-app.service
+
+if [ -n "$GITLAB_RUNNER_TOKEN" ] ; then
+  systemctl --user restart gitlab-runner.service
+fi

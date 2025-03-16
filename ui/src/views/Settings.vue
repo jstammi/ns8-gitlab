@@ -68,6 +68,13 @@
                 :invalid-message="error.registryHost"
                 ref="registryHost"
             ></cv-text-input>
+            <cv-text-input
+                :label="$t('settings.runner_token')"
+                v-model="runner_token"
+                :disabled="loading.getConfiguration || loading.configureModule"
+                :invalid-message="error.runner_token"
+                ref="runner_token"
+            ></cv-text-input>
             <cv-row v-if="error.configureModule">
               <cv-column>
                 <NsInlineNotification
@@ -94,14 +101,8 @@
 
 <script>
 import to from "await-to-js";
-import { mapState } from "vuex";
-import {
-  QueryParamService,
-  UtilService,
-  TaskService,
-  IconService,
-  PageTitleService,
-} from "@nethserver/ns8-ui-lib";
+import {mapState} from "vuex";
+import {IconService, PageTitleService, QueryParamService, TaskService, UtilService,} from "@nethserver/ns8-ui-lib";
 
 export default {
   name: "Settings",
@@ -126,6 +127,7 @@ export default {
       ldap_domain: "",
       ldap_domain_list: [],
       registryHost: "",
+      runner_token: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -136,7 +138,9 @@ export default {
         host: "",
         password: "",
         ldap_domain: "",
-        ldap_domain_list: ""
+        ldap_domain_list: "",
+        registryHost: "",
+        runner_token: "",
       },
     };
   },
@@ -213,7 +217,8 @@ export default {
       this.password = config.password;
       this.ldap_domain = config.ldap_domain;
       this.ldap_domain_list = config.ldap_domain_list;
-      this.registryHost = config.registry_host
+      this.registryHost = config.registry_host;
+      this.runner_token = config.runner_token;
 
       // TODO focus first configuration field
       this.focusElement("host");
@@ -278,10 +283,11 @@ export default {
           data: {
             host: this.host,
             http2https: true,
-            lets_encrypt: true,
+            lets_encrypt: false,
             password: this.password,
             ldap_domain: this.ldap_domain,
-            registry_host: this.registryHost
+            registry_host: this.registryHost,
+            runner_token: this.runner_token
             // TODO configuration fields
           },
           extra: {

@@ -5,12 +5,13 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-# Configure ldap 
+# Configure ldap
 
-import sys
-import os
 import agent
+import os
+import sys
 from agent.ldapproxy import Ldapproxy
+
 
 def dict_to_gitlab_rb(config, indent=0):
     lines = []
@@ -77,17 +78,17 @@ if ldap_domain:
         # configuration, pointing to nowhere, just to set the variables.
         # Once the domain becomes available, the event will fix them.
         sys.exit(2)
-    
+
     gitlab_conf.append(f"gitlab_rails['ldap_enabled'] = true")
 
     uid = 'uid'
-    ad = False
+    ad = 'false'
     if odom['schema'] == 'ad':
         uid = "sAMAccountName"
-        ad = True
+        ad = 'true'
     else:
         uid = 'uid'
-        ad = False
+        ad = 'false'
 
     gitlab_config['ldap_servers'] = {
         'main': {
@@ -99,23 +100,27 @@ if ldap_domain:
             'active_directory': ad,
             'port': odom['port'],
             'base': odom['base_dn'],
-            'block_auto_created_users': False,
+            'block_auto_created_users': 'false',
             'encryption': 'plain',
-            'verify_certificates': False,
-            'block_auto_created_user': False
+            'verify_certificates': 'false',
+            'block_auto_created_user': 'false'
         }
     }
 
 # Mail Setting
 
+if smtp_settings['tls_verify']:
+    tls_verify = 'true'
+else:
+    tls_verify = 'false'
+
 gitlab_conf.append("gitlab_rails['smtp_enable'] = true")
 gitlab_conf.append(f"gitlab_rails['smtp_address'] = {smtp_settings['host']}")
 gitlab_conf.append(f"gitlab_rails['smtp_port'] = {smtp_settings['port']}")
-gitlab_conf.append(f"gitlab_rails['smtp_port'] = {smtp_settings['port']}")
-gitlab_conf.append(f"gitlab_rails['smtp_tls'] = {smtp_settings['tls_verify']}")
+gitlab_conf.append(f"gitlab_rails['smtp_tls'] = {tls_verify}")
 
 if smtp_settings['password'] != 'none':
-    gitlab_conf.append(f"gitlab_rails['smtp_authentication'] = {smtp_settings['encrypt_smtp']}")
+    gitlab_conf.append('gitlab_rails[\'smtp_authentication\'] = "login"')
 if smtp_settings['username'] and smtp_settings['password']:
     gitlab_conf.append(f"gitlab_rails['smtp_password'] = {smtp_settings['password']}")
     gitlab_conf.append(f"gitlab_rails['smtp_username'] = {smtp_settings['username']}")

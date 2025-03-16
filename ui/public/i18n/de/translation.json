@@ -20,7 +20,8 @@
         "ldap_domain": "LDAP-Domäne",
         "choose_ldap_domain": "LDAP-Domäne wählen",
         "choose_the_ldap_domain_to_authenticate_users": "Wählen Sie eine LDAP-Domäne aus, mit welcher sich Benutzer authentifizieren können.",
-        "registryHost": "Registry-URL"
+        "registry_host": "Registry-URL",
+        "runner_token": "Gitlab-Runner Token"
     },
     "common": {
         "required": "erforderlich",
@@ -44,7 +45,8 @@
         "no_volumes": "keine Volumen"
     },
     "about": {
-        "title": "Über"
+        "title": "Über",
+        "source_package": "Quellpaket"
     },
     "action": {
         "list-backup-repositories": "Liste der Datensicherungs-Speicherort",
