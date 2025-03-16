@@ -69,6 +69,9 @@ if [[ -n "${CI}" ]]; then
 else
     # Just print info for manual push
     printf "Publish the images with:\n\n"
-    for image in "${images[@],,}"; do printf "  buildah push %s docker://%s:%s\n" "${image}" "${image}" "${IMAGETAG:-latest}" ; done
+    for image in "${images[@],,}"; do
+        IMAGETAG="${IMAGETAG:-latest}"
+        printf "  buildah push %s docker://%s:%s\n" "${image}" "${image}" "${IMAGETAG//\//__}"
+    done
     printf "\n"
 fi
