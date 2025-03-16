@@ -32,6 +32,20 @@
                 :invalid-message="error.host"
                 ref="host"
             ></cv-text-input>
+            <cv-toggle
+                value="letsEncrypt"
+                :label="$t('settings.lets_encrypt')"
+                v-model="isLetsEncryptEnabled"
+                :disabled="loading.getConfiguration || loading.configureModule"
+                class="mg-bottom"
+            >
+              <template slot="text-left">{{
+                  $t("settings.disabled")
+                }}</template>
+              <template slot="text-right">{{
+                  $t("settings.enabled")
+                }}</template>
+            </cv-toggle>
             <cv-text-input
                 :label="$t('settings.password')"
                 v-model="password"
@@ -123,6 +137,7 @@ export default {
       },
       urlCheckInterval: null,
       host: "",
+      lets_encrypt: true,
       password: "",
       ldap_domain: "",
       ldap_domain_list: [],
@@ -136,6 +151,7 @@ export default {
         getConfiguration: "",
         configureModule: "",
         host: "",
+        lets_encrypt: true,
         password: "",
         ldap_domain: "",
         ldap_domain_list: "",
@@ -214,6 +230,7 @@ export default {
       console.log("config", config);
 
       this.host = config.host;
+      this.lets_encrypt = config.lets_encrypt;
       this.password = config.password;
       this.ldap_domain = config.ldap_domain;
       this.ldap_domain_list = config.ldap_domain_list;
@@ -283,7 +300,7 @@ export default {
           data: {
             host: this.host,
             http2https: true,
-            lets_encrypt: false,
+            lets_encrypt: this.lets_encrypt,
             password: this.password,
             ldap_domain: this.ldap_domain,
             registry_host: this.registryHost,

@@ -19,9 +19,11 @@ Let's assume that the gitlab1 instance is named `gitlab1`.
 
 Launch `configure-module`, by setting the following parameters:
 - `host`: The URL that the Gitlab-Installation is reachable.
-- `registry_host`: The URL the Gitlab Registry is reachable
-- `http2https`: If traefik should redirect to the https protocoll
 - `lets_encrypt`: If Nethserver should get a Lets Encrypt HTTPS Cert
+- `ldap_domain`: The (optional) LDAP domain authenticating users by
+- `registry_host`: The URL the Gitlab Registry is reachable
+- `initial_password`: The initial `admin` user password
+- `runner_token`: The ´gitlab-runner` token used for registration at the gitlab
 
 Example:
 
